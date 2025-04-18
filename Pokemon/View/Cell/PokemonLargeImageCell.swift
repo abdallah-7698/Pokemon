@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PokemonLargeImageCell: View {
     var body: some View {
-       
+        
         ZStack {
             
             RoundedRectangle(cornerRadius: 12)
@@ -18,30 +18,8 @@ struct PokemonLargeImageCell: View {
             VStack(spacing: 15) {
                 
                 HStack {
-                    HStack {
-                        ZStack {
-                            Circle()
-                                .fill(.white)
-                            
-                            Image("Vector")
-                                .resizable()
-                                .renderingMode(.template)
-                                .scaledToFit()
-                                .foregroundColor(.green)
-                                .frame(width: 10)
-                        }
+                    ElementImageView(imageName: "Vector", color: .green)
 
-                        Text("Poison")
-                            .font(.caption)
-                            .fontWeight(.bold)
-                    }
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 15)
-                            .fill(Color.white.opacity(0.25))
-                    }
-                    
                     Spacer()
                     Text("#001")
                         .font(.caption)
@@ -78,11 +56,33 @@ struct PokemonLargeImageCell: View {
             .padding()
         }
         .frame(width: 150, height: 150)
-            
-                
+        
+        
     }
 }
 
 #Preview {
     PokemonLargeImageCell()
+}
+
+struct ElementImageView: View {
+    let imageName: String
+    let color: Color
+    
+    var body: some View {
+        HStack {
+            ZStack {
+                Circle()
+                    .fill(.white)
+                    .frame(width: 35, height: 35)
+                
+                Image(imageName)
+                    .resizable()
+                    .renderingMode(.template)
+                    .scaledToFit()
+                    .foregroundColor(color)
+                    .frame(width: 20)
+            }
+        }
+    }
 }
