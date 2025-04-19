@@ -18,10 +18,11 @@ struct EvolutionsView: View {
     let monsterName: String = "Charmander"
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text("Evolutions")
                 .textCase(.uppercase)
-                .font(.title2)
+                .font(.title3)
+                .fontWeight(.medium)
                 .padding(5)
             
             VStack(alignment: .leading, spacing: 5) {
