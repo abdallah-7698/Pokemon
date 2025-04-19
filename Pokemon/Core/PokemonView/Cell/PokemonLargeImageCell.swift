@@ -32,7 +32,7 @@ struct PokemonLargeImageCell: View {
                     }
                     
                     Spacer()
-                    Text(formatNumber(viewModel.pokemon?.id))
+                    Text("#\(formatNumber(viewModel.pokemon?.id))")
                         .font(.caption)
                         .fontWeight(.bold)
                 }
@@ -62,7 +62,6 @@ struct PokemonLargeImageCell: View {
         }
         .frame(width: 150, height: 150)
         
-        
     }
     
     func elements(from types: [PokemonType]?) -> [PokemonElement] {
@@ -79,9 +78,9 @@ struct PokemonLargeImageCell: View {
     
     private  func formatNumber(_ number: Int?) -> String {
         guard let number = number else {
-            return "#---" // Placeholder for nil
+            return "---" // Placeholder for nil
         }
-        return number <= 999 ? String(format: "%03d", number) : "#\(number)"
+        return number <= 999 ? String(format: "%03d", number) : "\(number)"
     }
     
 }

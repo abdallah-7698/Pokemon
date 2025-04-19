@@ -6,8 +6,38 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3F9C50FF2DB3D90F00C2D090 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9C50F72DB3D90F00C2D090 /* Networking.framework */; };
+		3F9C51002DB3D90F00C2D090 /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9C50F72DB3D90F00C2D090 /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3F9C50FD2DB3D90F00C2D090 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F51DC7D2DB2A0CD0050F0A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F9C50F62DB3D90F00C2D090;
+			remoteInfo = Networking;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3F9C51042DB3D90F00C2D090 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3F9C51002DB3D90F00C2D090 /* Networking.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3F51DC852DB2A0CD0050F0A1 /* Pokemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F9C50F72DB3D90F00C2D090 /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +46,23 @@
 			path = Pokemon;
 			sourceTree = "<group>";
 		};
+		3F9C50F82DB3D90F00C2D090 /* Networking */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Networking;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		3F51DC822DB2A0CD0050F0A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F9C50FF2DB3D90F00C2D090 /* Networking.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F9C50F42DB3D90F00C2D090 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				3F51DC872DB2A0CD0050F0A1 /* Pokemon */,
+				3F9C50F82DB3D90F00C2D090 /* Networking */,
 				3F51DC862DB2A0CD0050F0A1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,11 +85,22 @@
 			isa = PBXGroup;
 			children = (
 				3F51DC852DB2A0CD0050F0A1 /* Pokemon.app */,
+				3F9C50F72DB3D90F00C2D090 /* Networking.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3F9C50F22DB3D90F00C2D090 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		3F51DC842DB2A0CD0050F0A1 /* Pokemon */ = {
@@ -55,10 +110,12 @@
 				3F51DC812DB2A0CD0050F0A1 /* Sources */,
 				3F51DC822DB2A0CD0050F0A1 /* Frameworks */,
 				3F51DC832DB2A0CD0050F0A1 /* Resources */,
+				3F9C51042DB3D90F00C2D090 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3F9C50FE2DB3D90F00C2D090 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				3F51DC872DB2A0CD0050F0A1 /* Pokemon */,
@@ -69,6 +126,29 @@
 			productName = Pokemon;
 			productReference = 3F51DC852DB2A0CD0050F0A1 /* Pokemon.app */;
 			productType = "com.apple.product-type.application";
+		};
+		3F9C50F62DB3D90F00C2D090 /* Networking */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F9C51012DB3D90F00C2D090 /* Build configuration list for PBXNativeTarget "Networking" */;
+			buildPhases = (
+				3F9C50F22DB3D90F00C2D090 /* Headers */,
+				3F9C50F32DB3D90F00C2D090 /* Sources */,
+				3F9C50F42DB3D90F00C2D090 /* Frameworks */,
+				3F9C50F52DB3D90F00C2D090 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3F9C50F82DB3D90F00C2D090 /* Networking */,
+			);
+			name = Networking;
+			packageProductDependencies = (
+			);
+			productName = Networking;
+			productReference = 3F9C50F72DB3D90F00C2D090 /* Networking.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -81,6 +161,9 @@
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					3F51DC842DB2A0CD0050F0A1 = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					3F9C50F62DB3D90F00C2D090 = {
 						CreatedOnToolsVersion = 16.3;
 					};
 				};
@@ -100,12 +183,20 @@
 			projectRoot = "";
 			targets = (
 				3F51DC842DB2A0CD0050F0A1 /* Pokemon */,
+				3F9C50F62DB3D90F00C2D090 /* Networking */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3F51DC832DB2A0CD0050F0A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F9C50F52DB3D90F00C2D090 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +213,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3F9C50F32DB3D90F00C2D090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3F9C50FE2DB3D90F00C2D090 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F9C50F62DB3D90F00C2D090 /* Networking */;
+			targetProxy = 3F9C50FD2DB3D90F00C2D090 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		3F51DC8E2DB2A0CF0050F0A1 /* Debug */ = {
@@ -298,6 +404,74 @@
 			};
 			name = Release;
 		};
+		3F9C51022DB3D90F00C2D090 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = abdallah.mohammed.Networking;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3F9C51032DB3D90F00C2D090 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = abdallah.mohammed.Networking;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -315,6 +489,15 @@
 			buildConfigurations = (
 				3F51DC912DB2A0CF0050F0A1 /* Debug */,
 				3F51DC922DB2A0CF0050F0A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F9C51012DB3D90F00C2D090 /* Build configuration list for PBXNativeTarget "Networking" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F9C51022DB3D90F00C2D090 /* Debug */,
+				3F9C51032DB3D90F00C2D090 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
