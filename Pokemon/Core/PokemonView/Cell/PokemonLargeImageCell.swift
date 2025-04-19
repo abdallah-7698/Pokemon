@@ -78,7 +78,7 @@ struct PokemonLargeImageCell: View {
     
     private  func formatNumber(_ number: Int?) -> String {
         guard let number = number else {
-            return "---" // Placeholder for nil
+            return "000" // Placeholder for nil
         }
         return number <= 999 ? String(format: "%03d", number) : "\(number)"
     }
@@ -109,28 +109,4 @@ struct ElementImageView: View {
             }
         }
     }
-}
-
-struct PokemonMonsterImage: View {
-    let url: String?
-    
-    var body: some View {
-        VStack {
-            if let url = url {
-                AsyncImage(url: URL(string: url)) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .imageScale(.small)
-                        .frame(width: 100, height: 100)
-                } placeholder: {
-                    EmptyView()
-                }
-            } else {
-                EmptyView()
-            }
-        }
-        
-    }
-    
 }
