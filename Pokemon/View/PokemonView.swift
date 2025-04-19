@@ -11,6 +11,9 @@ struct PokemonView: View {
     @State private var searchText = ""
     private let gridItems = [GridItem(.flexible(), spacing: 10),
                              GridItem(.flexible(), spacing: 10)]
+    
+    @StateObject private var viewModel = PokemonListResponseViewModel()
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -29,8 +32,8 @@ struct PokemonView: View {
                     Spacer()
 
                     LazyVGrid(columns: gridItems, spacing: 10) {
-                        ForEach(0..<51) { item in
-                            PokemonLargeImageCell()
+                        ForEach(viewModel.pokemonStringURLs, id: \.url) { pokemonStringURL in
+                            PokemonLargeImageCell(pokemonStringURL: pokemonStringURL.url)
                                 .frame(height: 270)
                         }
                     }

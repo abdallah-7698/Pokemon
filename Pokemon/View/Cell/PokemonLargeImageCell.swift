@@ -5,23 +5,34 @@
 //  Created by name on 18/04/2025.
 //
 
+
 import SwiftUI
 
 struct PokemonLargeImageCell: View {
+    
+    private let pokemonStringURL: String
+    @StateObject private var viewModel: PokemonViewModel
+    
+    init(pokemonStringURL: String) {
+        self.pokemonStringURL = pokemonStringURL
+        _viewModel = StateObject(wrappedValue: PokemonViewModel(url: pokemonStringURL))
+    }
+    
     var body: some View {
-        
         ZStack {
             
             RoundedRectangle(cornerRadius: 12)
-                .fill(.green)
+                .fill(elements(from: viewModel.pokemon?.types).first?.color ?? getNoElement().color)
             
             VStack(spacing: 15) {
                 
                 HStack {
-                    ElementImageView(imageName: "Vector", color: .green)
-
+                    ForEach(elements(from: viewModel.pokemon?.types), id: \.self) { type in
+                        ElementImageView(imageName: type.imageName, color: type.color)
+                    }
+                    
                     Spacer()
-                    Text("#001")
+                    Text(formatNumber(viewModel.pokemon?.id))
                         .font(.caption)
                         .fontWeight(.bold)
                 }
@@ -30,25 +41,19 @@ struct PokemonLargeImageCell: View {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(.white.opacity(0.3))
                     
-                    Image("Vector")
+                    Image(elements(from: viewModel.pokemon?.types).first?.imageName ?? getNoElement().imageName)
                         .resizable()
                         .renderingMode(.template)
                         .foregroundColor(.white)
                         .opacity(0.5)
                         .padding()
                     
-                    Image("bulbasaur 1")
-                        .resizable()
-                        .scaledToFit()
-                        .imageScale(.small)
-                        .frame(width: 100, height: 100)
+                    PokemonMonsterImage(url: viewModel.pokemon?.sprites.frontDefault)
                     
                 }
                 .frame(width: 150, height: 150)
                 
-                
-                
-                Text("Bulbasour")
+                Text(viewModel.pokemon?.name.capitalized ?? "")
                     .font(.title3)
                     .fontWeight(.semibold)
                 
@@ -59,10 +64,30 @@ struct PokemonLargeImageCell: View {
         
         
     }
+    
+    func elements(from types: [PokemonType]?) -> [PokemonElement] {
+        if types != nil {
+            return types!.compactMap { PokemonElement(rawValue: $0.type.name.lowercased()) }
+        } else {
+            return [ getNoElement() ]
+        }
+    }
+    
+    func getNoElement() -> PokemonElement {
+        return PokemonElement(rawValue: "noElement")!
+    }
+    
+    private  func formatNumber(_ number: Int?) -> String {
+        guard let number = number else {
+            return "#---" // Placeholder for nil
+        }
+        return number <= 999 ? String(format: "%03d", number) : "#\(number)"
+    }
+    
 }
 
 #Preview {
-    PokemonLargeImageCell()
+    PokemonLargeImageCell(pokemonStringURL: "String")
 }
 
 struct ElementImageView: View {
@@ -85,4 +110,28 @@ struct ElementImageView: View {
             }
         }
     }
+}
+
+struct PokemonMonsterImage: View {
+    let url: String?
+    
+    var body: some View {
+        VStack {
+            if let url = url {
+                AsyncImage(url: URL(string: url)) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .imageScale(.small)
+                        .frame(width: 100, height: 100)
+                } placeholder: {
+                    EmptyView()
+                }
+            } else {
+                EmptyView()
+            }
+        }
+        
+    }
+    
 }
