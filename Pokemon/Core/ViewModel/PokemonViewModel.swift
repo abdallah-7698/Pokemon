@@ -15,10 +15,9 @@ class PokemonViewModel: ObservableObject {
     
     init(url: String) {
         self.url = url
-        fetchPokemon(from: url)
     }
     
-    func fetchPokemon(from url: String) {
+    public  func fetchPokemon() {
         let newURL = sanitizedURL(from: url)
         guard let url = URL(string: newURL) else {
             print("❌ Invalid URL")

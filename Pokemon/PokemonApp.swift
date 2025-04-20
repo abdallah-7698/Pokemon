@@ -27,9 +27,11 @@ struct PokemonApp: App {
 }
 
 //TODO: - Next
-// change the view model so it does not load the pokemon only gives the order to download
-// make the item load the show the data (animated imaeg)
+
+// make the item load the show the data
+
 // make the local data storage
-// make the loading on the scroll
+// i think i will make load logic in will appear func
+
 // make the monster evaluation with showing the levels
 

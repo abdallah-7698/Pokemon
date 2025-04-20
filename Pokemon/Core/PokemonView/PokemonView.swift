@@ -15,7 +15,6 @@ struct PokemonView: View {
     ]
     
     @StateObject private var viewModel = PokemonListResponseViewModel()
-//    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         NavigationView {
@@ -35,19 +34,27 @@ struct PokemonView: View {
                     Spacer()
                     
                     LazyVGrid(columns: gridItems, spacing: 10) {
-                        ForEach(viewModel.pokemonStringURLs, id: \.url) { pokemonStringURL in
+                        ForEach(viewModel.pokemonStringURLs.indices, id: \.self) { index in
+                            let pokemonStringURL = viewModel.pokemonStringURLs[index]
                             let pokemonViewModel = PokemonViewModel(url: pokemonStringURL.url)
                             NavigationLink(
                                 destination: PokemonDetailsView(viewModel: pokemonViewModel)
                             ) {
                                 PokemonLargeImageCell(viewModel: pokemonViewModel)
                                     .frame(height: 270)
+                                    .onAppear {
+                                        if index == viewModel.pokemonStringURLs.count - 5 {
+                                            viewModel.loadMore()
+                                        }
+                                    }
                             }
                             
                         }
                     }
+                
                 }
                 .padding(.horizontal, 10)
+                .padding(.bottom, 25)
             }
             .edgesIgnoringSafeArea(.bottom)
             .navigationBarTitleDisplayMode(.inline)

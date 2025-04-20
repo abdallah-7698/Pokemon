@@ -31,6 +31,9 @@ struct GifImageMonster: View {
                     .padding(.bottom, -20)
             } else {
                 PokemonMonsterImage(url: sprit.frontShiny)
+                    .scaledToFill()
+                    .frame(width: 180, height: 200)
+                    .padding(.bottom, -20)
             }
         }
     }

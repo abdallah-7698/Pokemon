@@ -4,7 +4,6 @@
 //
 //  Created by name on 19/04/2025.
 //
-
 import SwiftUI
 import Kingfisher
 
@@ -13,15 +12,18 @@ struct PokemonMonsterImage: View {
     
     var body: some View {
         VStack {
-            if let url = url {
-                KFImage(URL(string: url))
+            if let url = url, let imageURL = URL(string: url) {
+                KFImage(imageURL)
                     .resizable()
+                    .placeholder {
+                        ProgressView()
+                            .scaleEffect(2)
+                            .progressViewStyle(CircularProgressViewStyle())
+                    }
                     .scaledToFit()
             } else {
                 EmptyView()
             }
         }
-        
     }
-    
 }

@@ -20,7 +20,8 @@ struct PokemonListRequest: RequestType {
         try JSONDecoder().decode(ResponseType.self, from: data)
     }
     
-    init(offset: Int = 0, limit: Int = 20) {
+    init(offset: Int, limit: Int) {
         queryParameters = ["offset": "\(offset)", "limit": "\(limit)"]
     }
+    
 }

@@ -56,6 +56,7 @@ struct PokemonLargeImageCell: View {
             }
             .padding()
         }
+        .onAppear {viewModel.fetchPokemon()}
         .frame(width: 150, height: 150)
         
     }

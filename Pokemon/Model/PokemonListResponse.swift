@@ -12,6 +12,6 @@ struct PokemonListResponse: Codable {
     let results: [PokemonPartial]
 }
 
-struct PokemonPartial: Codable {
+struct PokemonPartial: Codable, Equatable {
     let url: String
 }
