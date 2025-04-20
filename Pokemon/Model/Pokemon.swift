@@ -104,7 +104,9 @@ struct PokemonAbility: Codable {
 }
 
 /// Contains the pokemon poerr
-struct PokemonStat: Codable {
+struct PokemonStat: Codable, Identifiable {
+    var id: UUID = .init()
+    
     let baseStat: Int
     let effort: Int
     let stat: NamedAPIResource

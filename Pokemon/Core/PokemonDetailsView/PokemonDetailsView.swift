@@ -9,39 +9,17 @@ import SwiftUI
 
 struct PokemonDetailsView: View {
     
-//    get the monster from the cahe or connect to the same view mode of the cell item
-    var pokemonStringURL: String {
-        didSet{
-            print("name: \(pokemonStringURL)")
-        }
-    }
-    
-    //MARK: - Init variables
-    let imageURL: String = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/4.gif"
-   
-    let monsterName: String = "Pikachu"
-    let monsterNumber: Int = 1
-    let elements: [PokemonElement] = [.ground, .grass]
-
-    let monsterWeight: Float = 9.6
-    let monsterHeight: Float = 0.4
-    let monsterExp: Int = 112
-    let monsterAbility: String = "Static"
-        
-    @State var hp: Float = 20
-    @State var attack: Float = 44
-    @State var defense: Float = 15
-    @State var specialAttack: Float = 88
-    @State var specialDefense: Float = 70
-    @State var speed: Float = 44
+    @ObservedObject var viewModel: PokemonViewModel
     
     //MARK: - Private variables
     let screenWidth: CGFloat = UIScreen.main.bounds.width
     let topCircleHeight: CGFloat = UIScreen.main.bounds.width*1.7
-    let emptyElement: PokemonElement = .noElement
-   
+    let noElement: PokemonElement = .noElement
+    
     @Environment(\.dismiss) var dismiss
-
+    
+    @State private var isShiny: Bool = false
+    
     
     var body: some View {
         VStack {
@@ -50,18 +28,34 @@ struct PokemonDetailsView: View {
                     
                     TopElementView(
                         height: topCircleHeight,
-                        elementImage: elements.first?.imageName ?? emptyElement.imageName,
-                        elementColor: elements.first?.color ?? emptyElement.color
-                    ) .overlay(alignment: .bottom) {
-                        GifImageMonster(url: imageURL)
-                    } .padding(.bottom)
+                        elementImage: elements(from: viewModel.pokemon.types).first?.imageName ?? noElement.imageName,
+                        elementColor: elements(from: viewModel.pokemon.types).first?.color ?? noElement.color
+                    )
+                    .overlay(alignment: .bottom) {
+                        GifImageMonster(sprit: viewModel.pokemon.sprites, isShiny: $isShiny)
+                    }
+                    .frame(width: screenWidth)
+                    .overlay(alignment: .bottomTrailing) {
+                        Button {
+                            isShiny.toggle()
+                        } label: {
+                            Image(isShiny ? "pokeball" : "shinyPokeball" )
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50)
+                        }
+                        .padding(.bottom, -20)
+                    }
+                    .padding(.bottom)
+                    .padding(.trailing, 40)
+                    
                     
                     VStack(alignment: .leading) {
-                        Text(monsterName.capitalized)
+                        Text(viewModel.pokemon.name.capitalized)
                             .font(.largeTitle)
                             .fontWeight(.semibold)
                         
-                        Text("Nº\(formatNumber(monsterNumber))")
+                        Text("Nº\(formatNumber(viewModel.pokemon.id))")
                             .fontWeight(.medium)
                             .foregroundStyle(.secondary)
                     }
@@ -69,7 +63,7 @@ struct PokemonDetailsView: View {
                     .frame(width: screenWidth, alignment: .leading)
                     
                     
-                    ElementFullView(elements: elements)
+                    ElementFullView(elements: elements(from: viewModel.pokemon.types))
                         .padding(.leading)
                         .frame(width: screenWidth, alignment: .leading)
                     
@@ -79,13 +73,13 @@ struct PokemonDetailsView: View {
                     // MARK: - Stats
                     VStack(spacing: 13) {
                         HStack(spacing: 20) {
-                            StatBlock(icon: "scalemass", label: "Weight", value: "\(monsterWeight) kg")
-                            StatBlock(icon: "ruler", label: "Height", value: "\(monsterHeight) m")
+                            StatBlock(icon: "scalemass", label: "Weight", value: "\(viewModel.pokemon.weight) kg")
+                            StatBlock(icon: "ruler", label: "Height", value: "\(viewModel.pokemon.height) m")
                         }
                         
                         HStack(spacing: 20) {
-                            StatBlock(icon: "leaf", label: "EXP", value: "\(monsterExp) EXP")
-                            StatBlock(icon: "bolt.fill", label: "Ability", value: monsterAbility)
+                            StatBlock(icon: "leaf", label: "EXP", value: "\(viewModel.pokemon.baseExperience) EXP")
+                            StatBlock(icon: "bolt.fill", label: "Ability", value: viewModel.pokemon.abilities.first?.ability.name ?? "NO ABILITY")
                         }
                         .padding(.bottom)
                         
@@ -95,12 +89,11 @@ struct PokemonDetailsView: View {
                     Divider()
                     
                     VStack(spacing: 5) {
-                        ElementProgress(title: "HP", color: elements.first!.color, progress: .constant(hp))
-                        ElementProgress(title: "Attack", color: elements.first!.color, progress: .constant(attack))
-                        ElementProgress(title: "Defense", color: elements.first!.color, progress: .constant(defense))
-                        ElementProgress(title: "Special-Attack", color: elements.first!.color, progress: .constant(specialAttack))
-                        ElementProgress(title: "Special-Defense", color: elements.first!.color, progress: .constant(specialDefense))
-                        ElementProgress(title: "Speed", color: elements.first!.color, progress: .constant(speed))
+                        ForEach(viewModel.pokemon.stats) { state in
+                            ElementProgress(title: state.stat.name.capitalized,
+                                            color: elements(from: viewModel.pokemon.types).first?.color ?? noElement.color,
+                                            progress: state.baseStat, total: 200)
+                        }
                         Spacer()
                     }
                     .padding(.horizontal)
@@ -109,9 +102,10 @@ struct PokemonDetailsView: View {
                     Divider()
                         .padding()
                     
-                    EvolutionsView(element: elements.first ?? emptyElement,
-                                   monsterName: monsterName,
-                                   order: monsterNumber)
+                    EvolutionsView(
+                        element: elements(from: viewModel.pokemon.types).first ?? noElement,
+                        monsterName: viewModel.pokemon.name,
+                        order: viewModel.pokemon.id)
                     
                 }
             }
@@ -139,6 +133,14 @@ struct PokemonDetailsView: View {
         
     }
     
+    func elements(from types: [PokemonType]?) -> [PokemonElement] {
+        if types != nil {
+            return types!.compactMap { PokemonElement(rawValue: $0.type.name.lowercased()) }
+        } else {
+            return [ noElement ]
+        }
+    }
+    
     private  func formatNumber(_ number: Int?) -> String {
         guard let number = number else {
             return "000" // Placeholder for nil
@@ -148,6 +150,5 @@ struct PokemonDetailsView: View {
 }
 
 #Preview {
-    PokemonDetailsView(pokemonStringURL: "")
-    
+    PokemonDetailsView(viewModel: PokemonViewModel(url: ""))
 }

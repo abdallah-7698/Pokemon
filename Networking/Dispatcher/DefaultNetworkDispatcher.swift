@@ -20,7 +20,6 @@ final class DefaultNetworkDispatcher: NetworkDispatcher {
     /// - Throws: `NetworkError.invalidURL`, `NetworkError.unableToComplete`, `NetworkError.invalidData`, or `NetworkError.invalidResponse`.
     func dispatch<Request: RequestType>(_ request: Request, completion: @escaping (Result<Request.ResponseType, NetworkError>) -> Void) {
         do {
-            print("❌", try request.asURLRequest())
             let urlRequest = try request.asURLRequest()
             
             let task = session.dataTask(with: urlRequest) { data, response, error in

@@ -16,37 +16,45 @@ class PokemonListResponseViewModel: ObservableObject {
     
     func fetch() {
         PokemonListRequest().perform { result in
-                switch result {
-                    case .success(let pokemonList):
-                    DispatchQueue.main.async {
-                        self.pokemonStringURLs = pokemonList.results
-                    }
-                case .failure(let error):
-                    print("❌ Network error:", error.localizedDescription)
+            switch result {
+            case .success(let pokemonList):
+                DispatchQueue.main.async {
+                    self.pokemonStringURLs = pokemonList.results
                 }
+            case .failure(let error):
+                print("❌ Network error:", error.localizedDescription)
+            }
         }
     }
 }
 
 class PokemonViewModel: ObservableObject {
-    @Published var pokemon: Pokemon? = nil
+    @Published var pokemon: Pokemon = .empty
     
-    init(url: String) { fetchPokemon(from: url) }
+    private let url: String
+    
+    init(url: String) {
+        self.url = url
+        fetchPokemon(from: url)
+    }
     
     func fetchPokemon(from url: String) {
-    
         let newURL = sanitizedURL(from: url)
-        guard let url = URL(string: newURL) else { return }
-    
+        guard let url = URL(string: newURL) else {
+            print("❌ Invalid URL")
+            return
+        }
+        
         PokemonRequest(baseUrl: url).perform { result in
+            DispatchQueue.main.async {
                 switch result {
-                    case .success(let pokemon):
-                    DispatchQueue.main.async {
-                        self.pokemon = pokemon
-                    }
+                case .success(let fetchedPokemon):
+                    self.pokemon = fetchedPokemon
                 case .failure(let error):
                     print("❌ Network error:", error.localizedDescription)
+                    return
                 }
+            }
         }
     }
     

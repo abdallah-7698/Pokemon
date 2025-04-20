@@ -10,20 +10,33 @@ import SwiftUI
 
 struct GifImageMonster: View {
     
-    let url: String?
+    let sprit: PokemonSprites
+    @Binding var isShiny: Bool
     
     var body: some View {
-        if let stringURL = url, let URL = URL(string: stringURL) {
-            OnlineGIFView(gifURL: URL)
-                .scaledToFill()
-                .frame(width: 180, height: 200)
-                .padding(.bottom, -20)
+        if !isShiny {
+            if let stringURL = sprit.animated?.frontDefault, let URL = URL(string: stringURL) {
+                OnlineGIFView(gifURL: URL)
+                    .scaledToFill()
+                    .frame(width: 180, height: 200)
+                    .padding(.bottom, -20)
+            } else {
+                PokemonMonsterImage(url: sprit.frontDefault)
+            }
         } else {
-            PokemonMonsterImage(url: url)
+            if let stringURL = sprit.animated?.frontShiny, let URL = URL(string: stringURL) {
+                OnlineGIFView(gifURL: URL)
+                    .scaledToFill()
+                    .frame(width: 180, height: 200)
+                    .padding(.bottom, -20)
+            } else {
+                PokemonMonsterImage(url: sprit.frontShiny)
+            }
         }
     }
+    
 }
 
 #Preview {
-    GifImageMonster(url: nil)
+    GifImageMonster(sprit: PokemonSprites(), isShiny: .constant(false))
 }

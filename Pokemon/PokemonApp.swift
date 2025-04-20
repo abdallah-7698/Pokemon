@@ -17,7 +17,7 @@ struct PokemonApp: App {
 }
 
 //TODO: - Next
-//make on select code to mave to the item model
+// change the view model so it does not load the pokemon only gives the order to download
 // make the item load the show the data (animated imaeg)
 // make the local data storage
 // make the loading on the scroll

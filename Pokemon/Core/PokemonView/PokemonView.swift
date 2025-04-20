@@ -36,11 +36,11 @@ struct PokemonView: View {
                     
                     LazyVGrid(columns: gridItems, spacing: 10) {
                         ForEach(viewModel.pokemonStringURLs, id: \.url) { pokemonStringURL in
-                            
+                            let pokemonViewModel = PokemonViewModel(url: pokemonStringURL.url)
                             NavigationLink(
-                                destination: PokemonDetailsView(pokemonStringURL: pokemonStringURL.url)
+                                destination: PokemonDetailsView(viewModel: pokemonViewModel)
                             ) {
-                                PokemonLargeImageCell(pokemonStringURL: pokemonStringURL.url)
+                                PokemonLargeImageCell(viewModel: pokemonViewModel)
                                     .frame(height: 270)
                             }
                             

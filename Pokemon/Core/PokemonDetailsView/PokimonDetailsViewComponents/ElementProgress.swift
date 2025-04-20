@@ -12,10 +12,11 @@ struct ElementProgress: View {
     let title: String
     let color: Color
     
-    @Binding var progress: Float
+    var progress: Int
+    var total: Int
     
     var body: some View {
-        ProgressView(value: progress, total: 100) {
+        ProgressView(value: Float(progress), total: Float(total)) {
             Text(title.uppercased())
                 .font(.footnote)
                 .textCase(.uppercase)
@@ -28,7 +29,7 @@ struct ElementProgress: View {
 }
 
 #Preview {
-    ElementProgress(title: "Title", color: .purple, progress: .constant(60))
+    ElementProgress(title: "Title", color: .purple, progress: 60, total: 100)
 }
 
 struct BarProgressStyle: ProgressViewStyle {

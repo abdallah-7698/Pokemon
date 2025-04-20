@@ -10,29 +10,23 @@ import SwiftUI
 
 struct PokemonLargeImageCell: View {
     
-    private let pokemonStringURL: String
-    @StateObject private var viewModel: PokemonViewModel
-    
-    init(pokemonStringURL: String) {
-        self.pokemonStringURL = pokemonStringURL
-        _viewModel = StateObject(wrappedValue: PokemonViewModel(url: pokemonStringURL))
-    }
+    @ObservedObject var viewModel: PokemonViewModel
     
     var body: some View {
         ZStack {
             
             RoundedRectangle(cornerRadius: 12)
-                .fill(elements(from: viewModel.pokemon?.types).first?.color ?? getNoElement().color)
+                .fill(elements(from: viewModel.pokemon.types).first?.color ?? getNoElement().color)
             
             VStack(spacing: 15) {
                 
                 HStack {
-                    ForEach(elements(from: viewModel.pokemon?.types), id: \.self) { type in
+                    ForEach(elements(from: viewModel.pokemon.types), id: \.self) { type in
                         ElementImageView(imageName: type.imageName, color: type.color)
                     }
                     
                     Spacer()
-                    Text("#\(formatNumber(viewModel.pokemon?.id))")
+                    Text("#\(formatNumber(viewModel.pokemon.id))")
                         .font(.caption)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
@@ -42,19 +36,19 @@ struct PokemonLargeImageCell: View {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(.white.opacity(0.3))
                     
-                    Image(elements(from: viewModel.pokemon?.types).first?.imageName ?? getNoElement().imageName)
+                    Image(elements(from: viewModel.pokemon.types).first?.imageName ?? getNoElement().imageName)
                         .resizable()
                         .renderingMode(.template)
                         .foregroundColor(.white)
                         .opacity(0.5)
                         .padding()
                     
-                    PokemonMonsterImage(url: viewModel.pokemon?.sprites.frontDefault)
+                    PokemonMonsterImage(url: viewModel.pokemon.sprites.frontDefault)
                     
                 }
                 .frame(width: 150, height: 150)
                 
-                Text(viewModel.pokemon?.name.capitalized ?? "")
+                Text(viewModel.pokemon.name.capitalized)
                     .font(.title3)
                     .fontWeight(.semibold)
                     .foregroundColor(.black)
@@ -88,7 +82,7 @@ struct PokemonLargeImageCell: View {
 }
 
 #Preview {
-    PokemonLargeImageCell(pokemonStringURL: "String")
+    PokemonLargeImageCell(viewModel: PokemonViewModel(url: ""))
 }
 
 struct ElementImageView: View {
