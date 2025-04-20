@@ -21,7 +21,7 @@ final class DefaultNetworkDispatcher: NetworkDispatcher {
     func dispatch<Request: RequestType>(_ request: Request, completion: @escaping (Result<Request.ResponseType, NetworkError>) -> Void) {
         do {
             let urlRequest = try request.asURLRequest()
-            
+            print("❌ Network request:", urlRequest)
             let task = session.dataTask(with: urlRequest) { data, response, error in
                 if error != nil {
                     completion(.failure(NetworkError.unableToComplete))

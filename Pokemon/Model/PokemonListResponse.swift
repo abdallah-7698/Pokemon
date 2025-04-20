@@ -14,4 +14,5 @@ struct PokemonListResponse: Codable {
 
 struct PokemonPartial: Codable, Equatable {
     let url: String
+    let name: String
 }

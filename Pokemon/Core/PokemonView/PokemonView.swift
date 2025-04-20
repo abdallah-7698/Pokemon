@@ -15,7 +15,7 @@ struct PokemonView: View {
     ]
     
     @StateObject private var viewModel = PokemonListResponseViewModel()
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -35,18 +35,11 @@ struct PokemonView: View {
                     
                     LazyVGrid(columns: gridItems, spacing: 10) {
                         ForEach(viewModel.pokemonStringURLs.indices, id: \.self) { index in
-                            let pokemonStringURL = viewModel.pokemonStringURLs[index]
-                            let pokemonViewModel = PokemonViewModel(url: pokemonStringURL.url)
                             NavigationLink(
-                                destination: PokemonDetailsView(viewModel: pokemonViewModel)
+                                destination: PokemonDetailsView(loadingURL: viewModel.pokemonStringURLs[index].url)
                             ) {
-                                PokemonLargeImageCell(viewModel: pokemonViewModel)
+                                PokemonLargeImageCell(loadingURL: viewModel.pokemonStringURLs[index].url)
                                     .frame(height: 270)
-                                    .onAppear {
-                                        if index == viewModel.pokemonStringURLs.count - 5 {
-                                            viewModel.loadMore()
-                                        }
-                                    }
                             }
                             
                         }
@@ -54,7 +47,7 @@ struct PokemonView: View {
                 
                 }
                 .padding(.horizontal, 10)
-                .padding(.bottom, 25)
+                .padding(.bottom, 30)
             }
             .edgesIgnoringSafeArea(.bottom)
             .navigationBarTitleDisplayMode(.inline)

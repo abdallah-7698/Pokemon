@@ -10,7 +10,9 @@ import SwiftUI
 
 struct PokemonLargeImageCell: View {
     
-    @ObservedObject var viewModel: PokemonViewModel
+    @ObservedObject var viewModel: PokemonViewModel = .init()
+    
+    let loadingURL: String
     
     var body: some View {
         ZStack {
@@ -56,7 +58,7 @@ struct PokemonLargeImageCell: View {
             }
             .padding()
         }
-        .onAppear {viewModel.fetchPokemon()}
+        .onAppear {viewModel.fetchPokemon(from:loadingURL)}
         .frame(width: 150, height: 150)
         
     }
@@ -83,7 +85,7 @@ struct PokemonLargeImageCell: View {
 }
 
 #Preview {
-    PokemonLargeImageCell(viewModel: PokemonViewModel(url: ""))
+    PokemonLargeImageCell(loadingURL: "")
 }
 
 struct ElementImageView: View {

@@ -12,9 +12,8 @@ class PokemonListResponseViewModel: ObservableObject {
             
     init() { fetch() }
     
-    private func fetch(offset: Int = 0, count: Int = 20) {
-        let limit = offset + count <= 10277 ? 10277 % count : count
-        PokemonListRequest(offset: offset, limit: limit).perform { result in
+    private func fetch(offset: Int = 0, count: Int = 10277) {
+        PokemonListRequest(offset: offset, limit: count).perform { result in
             switch result {
             case .success(let pokemonList):
                 DispatchQueue.main.async {
@@ -24,9 +23,5 @@ class PokemonListResponseViewModel: ObservableObject {
                 print("❌ Network error:", error.localizedDescription)
             }
         }
-    }
-    
-    public func loadMore() {
-        fetch(offset: pokemonStringURLs.count)
     }
 }

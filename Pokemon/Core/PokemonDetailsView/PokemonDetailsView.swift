@@ -9,7 +9,9 @@ import SwiftUI
 
 struct PokemonDetailsView: View {
     
-    @ObservedObject var viewModel: PokemonViewModel
+    @ObservedObject var viewModel: PokemonViewModel = .init()
+    
+    let loadingURL: String
     
     //MARK: - Private variables
     let screenWidth: CGFloat = UIScreen.main.bounds.width
@@ -111,6 +113,7 @@ struct PokemonDetailsView: View {
             }
             .edgesIgnoringSafeArea(.top)
         }
+        .onAppear {viewModel.fetchPokemon(from:loadingURL )}
         .frame(width: screenWidth)
         .toolbar(.hidden, for: .tabBar)
         .navigationBarBackButtonHidden()
@@ -150,5 +153,5 @@ struct PokemonDetailsView: View {
 }
 
 #Preview {
-    PokemonDetailsView(viewModel: PokemonViewModel(url: ""))
+    PokemonDetailsView(loadingURL: "")
 }

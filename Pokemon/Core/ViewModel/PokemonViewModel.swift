@@ -11,24 +11,18 @@ import Foundation
 class PokemonViewModel: ObservableObject {
     @Published var pokemon: Pokemon = .empty
     
-    private let url: String
-    
-    init(url: String) {
-        self.url = url
-    }
-    
-    public  func fetchPokemon() {
+    public  func fetchPokemon(from url: String) {
         let newURL = sanitizedURL(from: url)
         guard let url = URL(string: newURL) else {
             print("❌ Invalid URL")
             return
         }
         
-        PokemonRequest(baseUrl: url).perform { result in
+        PokemonRequest(baseUrl: url).perform { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let fetchedPokemon):
-                    self.pokemon = fetchedPokemon
+                    self?.pokemon = fetchedPokemon
                 case .failure(let error):
                     print("❌ Network error:", error.localizedDescription)
                     return
