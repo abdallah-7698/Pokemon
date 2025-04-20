@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct PokemonMonsterImage: View {
     let url: String?
@@ -13,13 +14,9 @@ struct PokemonMonsterImage: View {
     var body: some View {
         VStack {
             if let url = url {
-                AsyncImage(url: URL(string: url)) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                } placeholder: {
-                    EmptyView()
-                }
+                KFImage(URL(string: url))
+                    .resizable()
+                    .scaledToFit()
             } else {
                 EmptyView()
             }
