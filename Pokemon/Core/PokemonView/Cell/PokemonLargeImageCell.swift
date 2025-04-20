@@ -35,6 +35,7 @@ struct PokemonLargeImageCell: View {
                     Text("#\(formatNumber(viewModel.pokemon?.id))")
                         .font(.caption)
                         .fontWeight(.bold)
+                        .foregroundColor(.black)
                 }
                 
                 ZStack {
@@ -56,6 +57,7 @@ struct PokemonLargeImageCell: View {
                 Text(viewModel.pokemon?.name.capitalized ?? "")
                     .font(.title3)
                     .fontWeight(.semibold)
+                    .foregroundColor(.black)
                 
             }
             .padding()

@@ -9,19 +9,39 @@ import SwiftUI
 
 struct PokemonDetailsView: View {
     
-    private let screenWidth: CGFloat = UIScreen.main.bounds.width
-    private let topCircleHeight: CGFloat = UIScreen.main.bounds.width*1.7
-    private let imageURL: String = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/4.gif"
-    private let monsterName: String = "Pikachu"
-    private let monsterNumber: Int = 1
+//    get the monster from the cahe or connect to the same view mode of the cell item
+    var pokemonStringURL: String {
+        didSet{
+            print("name: \(pokemonStringURL)")
+        }
+    }
     
-    private let elements: [PokemonElement] = [.ground, .grass]
+    //MARK: - Init variables
+    let imageURL: String = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/4.gif"
+   
+    let monsterName: String = "Pikachu"
+    let monsterNumber: Int = 1
+    let elements: [PokemonElement] = [.ground, .grass]
+
+    let monsterWeight: Float = 9.6
+    let monsterHeight: Float = 0.4
+    let monsterExp: Int = 112
+    let monsterAbility: String = "Static"
+        
+    @State var hp: Float = 20
+    @State var attack: Float = 44
+    @State var defense: Float = 15
+    @State var specialAttack: Float = 88
+    @State var specialDefense: Float = 70
+    @State var speed: Float = 44
     
-    
-    @State private var progress: Float = 20
-    
-    private let emptyElement: PokemonElement = .noElement
-    
+    //MARK: - Private variables
+    let screenWidth: CGFloat = UIScreen.main.bounds.width
+    let topCircleHeight: CGFloat = UIScreen.main.bounds.width*1.7
+    let emptyElement: PokemonElement = .noElement
+   
+    @Environment(\.dismiss) var dismiss
+
     
     var body: some View {
         VStack {
@@ -59,13 +79,13 @@ struct PokemonDetailsView: View {
                     // MARK: - Stats
                     VStack(spacing: 13) {
                         HStack(spacing: 20) {
-                            StatBlock(icon: "scalemass", label: "Weight", value: "6.9 kg")
-                            StatBlock(icon: "ruler", label: "Height", value: "0.7 m")
+                            StatBlock(icon: "scalemass", label: "Weight", value: "\(monsterWeight) kg")
+                            StatBlock(icon: "ruler", label: "Height", value: "\(monsterHeight) m")
                         }
                         
                         HStack(spacing: 20) {
-                            StatBlock(icon: "leaf", label: "EXP", value: "128 EXP")
-                            StatBlock(icon: "bolt.fill", label: "Ability", value: "Overgrow")
+                            StatBlock(icon: "leaf", label: "EXP", value: "\(monsterExp) EXP")
+                            StatBlock(icon: "bolt.fill", label: "Ability", value: monsterAbility)
                         }
                         .padding(.bottom)
                         
@@ -75,12 +95,12 @@ struct PokemonDetailsView: View {
                     Divider()
                     
                     VStack(spacing: 5) {
-                        ElementProgress(title: "HP", color: elements.first!.color, progress: $progress)
-                        ElementProgress(title: "Attack", color: elements.first!.color, progress: $progress)
-                        ElementProgress(title: "Defense", color: elements.first!.color, progress: $progress)
-                        ElementProgress(title: "Special-Attack", color: elements.first!.color, progress: $progress)
-                        ElementProgress(title: "Special-Defense", color: elements.first!.color, progress: $progress)
-                        ElementProgress(title: "Speed", color: elements.first!.color, progress: $progress)
+                        ElementProgress(title: "HP", color: elements.first!.color, progress: .constant(hp))
+                        ElementProgress(title: "Attack", color: elements.first!.color, progress: .constant(attack))
+                        ElementProgress(title: "Defense", color: elements.first!.color, progress: .constant(defense))
+                        ElementProgress(title: "Special-Attack", color: elements.first!.color, progress: .constant(specialAttack))
+                        ElementProgress(title: "Special-Defense", color: elements.first!.color, progress: .constant(specialDefense))
+                        ElementProgress(title: "Speed", color: elements.first!.color, progress: .constant(speed))
                         Spacer()
                     }
                     .padding(.horizontal)
@@ -96,8 +116,27 @@ struct PokemonDetailsView: View {
                 }
             }
             .edgesIgnoringSafeArea(.top)
-            
         }
+        .frame(width: screenWidth)
+        .toolbar(.hidden, for: .tabBar)
+        .navigationBarBackButtonHidden()
+        .overlay(alignment: .topLeading){
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "chevron.left")
+                    .foregroundStyle(.black)
+                    .background {
+                        Circle()
+                            .fill(.white)
+                            .frame(width: 32, height: 32)
+                    }
+                    .padding(.leading, 20)
+                    .padding(.leading, 20)
+                    .shadow(radius: 5)
+            }
+        }
+        
     }
     
     private  func formatNumber(_ number: Int?) -> String {
@@ -109,6 +148,6 @@ struct PokemonDetailsView: View {
 }
 
 #Preview {
-    PokemonDetailsView()
+    PokemonDetailsView(pokemonStringURL: "")
     
 }

@@ -9,11 +9,14 @@ import SwiftUI
 
 struct PokemonView: View {
     @State private var searchText = ""
-    private let gridItems = [GridItem(.flexible(), spacing: 10),
-                             GridItem(.flexible(), spacing: 10)]
+    private let gridItems = [
+        GridItem(.flexible(), spacing: 10),
+        GridItem(.flexible(), spacing: 10)
+    ]
     
     @StateObject private var viewModel = PokemonListResponseViewModel()
-    
+//    @Environment(\.dismiss) var dismiss
+
     var body: some View {
         NavigationView {
             VStack {
@@ -30,11 +33,17 @@ struct PokemonView: View {
                 .padding(.horizontal)
                 ScrollView {
                     Spacer()
-
+                    
                     LazyVGrid(columns: gridItems, spacing: 10) {
                         ForEach(viewModel.pokemonStringURLs, id: \.url) { pokemonStringURL in
-                            PokemonLargeImageCell(pokemonStringURL: pokemonStringURL.url)
-                                .frame(height: 270)
+                            
+                            NavigationLink(
+                                destination: PokemonDetailsView(pokemonStringURL: pokemonStringURL.url)
+                            ) {
+                                PokemonLargeImageCell(pokemonStringURL: pokemonStringURL.url)
+                                    .frame(height: 270)
+                            }
+                            
                         }
                     }
                 }
