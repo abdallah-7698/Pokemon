@@ -11,11 +11,11 @@ struct EvolutionsView: View {
     private let screenWidth: CGFloat = UIScreen.main.bounds.width
     
     let element: PokemonElement = .fire
-    
-    let images: [String] = ["https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-                            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"]
-    let order: Int = 1
+    let images: [String] = [
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png"
+    ]
     let monsterName: String = "Charmander"
+    let order: Int = 1
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -27,7 +27,6 @@ struct EvolutionsView: View {
             
             VStack(alignment: .leading, spacing: 5) {
                 VStack {
-                    // items
                     ForEach(images, id: \.self) { image in
                         EvolutionsMonster(name: monsterName, order: order, url: image, element: element).frame(height: 80)
                         //                        arrowUpdate()
@@ -77,8 +76,12 @@ struct EvolutionsView: View {
                                     .scaledToFit()
                             )
                         )
-                    PokemonMonsterImage(url: url)
+                    
                 }
+                .overlay(content: {
+                    PokemonMonsterImage(url: url)
+                        .scaledToFill()
+                })
                 .frame(width: 120)
                 
                 VStack(alignment: .leading) {
