@@ -8,26 +8,6 @@
 
 import Foundation
 
-@MainActor
-class PokemonListResponseViewModel: ObservableObject {
-    @Published var pokemonStringURLs = [PokemonPartial]()
-    
-    init() { fetch() }
-    
-    func fetch() {
-        PokemonListRequest().perform { result in
-            switch result {
-            case .success(let pokemonList):
-                DispatchQueue.main.async {
-                    self.pokemonStringURLs = pokemonList.results
-                }
-            case .failure(let error):
-                print("❌ Network error:", error.localizedDescription)
-            }
-        }
-    }
-}
-
 class PokemonViewModel: ObservableObject {
     @Published var pokemon: Pokemon = .empty
     
