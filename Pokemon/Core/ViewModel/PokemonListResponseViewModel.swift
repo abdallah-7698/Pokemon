@@ -13,7 +13,8 @@ class PokemonListResponseViewModel: ObservableObject {
     init() { fetch() }
     
     private func fetch(offset: Int = 0, count: Int = 10277) {
-        PokemonListRequest(offset: offset, limit: count).perform { result in
+        PokemonListRequest(offset: offset, limit: count).perform { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let pokemonList):
                 DispatchQueue.main.async {

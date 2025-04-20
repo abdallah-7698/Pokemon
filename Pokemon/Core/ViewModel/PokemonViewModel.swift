@@ -19,10 +19,11 @@ class PokemonViewModel: ObservableObject {
         }
         
         PokemonRequest(baseUrl: url).perform { [weak self] result in
+            guard let self else { return }
             DispatchQueue.main.async {
                 switch result {
                 case .success(let fetchedPokemon):
-                    self?.pokemon = fetchedPokemon
+                    self.pokemon = fetchedPokemon
                 case .failure(let error):
                     print("❌ Network error:", error.localizedDescription)
                     return
