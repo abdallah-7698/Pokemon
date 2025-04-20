@@ -13,9 +13,9 @@ struct PokemonDetailsView: View {
     private let topCircleHeight: CGFloat = UIScreen.main.bounds.width*1.7
     private let imageURL: String = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/4.gif"
     private let monsterName: String = "Pikachu"
-    private let monsterNumber: String = "1"
+    private let monsterNumber: Int = 1
     
-    private let elements: [PokemonElement] = [.fire, .grass]
+    private let elements: [PokemonElement] = [.ground, .grass]
     
     
     @State private var progress: Float = 20
@@ -41,7 +41,7 @@ struct PokemonDetailsView: View {
                             .font(.largeTitle)
                             .fontWeight(.semibold)
                         
-                        Text("Nº\(formatNumber(Int(monsterNumber)))")
+                        Text("Nº\(formatNumber(monsterNumber))")
                             .fontWeight(.medium)
                             .foregroundStyle(.secondary)
                     }
@@ -89,7 +89,9 @@ struct PokemonDetailsView: View {
                     Divider()
                         .padding()
                     
-                    EvolutionsView()
+                    EvolutionsView(element: elements.first ?? emptyElement,
+                                   monsterName: monsterName,
+                                   order: monsterNumber)
                     
                 }
             }

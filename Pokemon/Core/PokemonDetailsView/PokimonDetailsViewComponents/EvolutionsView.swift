@@ -10,12 +10,12 @@ import SwiftUI
 struct EvolutionsView: View {
     private let screenWidth: CGFloat = UIScreen.main.bounds.width
     
-    let element: PokemonElement = .fire
+    let element: PokemonElement
     let images: [String] = [
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png"
     ]
-    let monsterName: String = "Charmander"
-    let order: Int = 1
+    let monsterName: String
+    let order: Int
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -129,5 +129,5 @@ struct EvolutionsView: View {
 }
 
 #Preview {
-    EvolutionsView()
+    EvolutionsView(element: .noElement, monsterName: "", order: 0)
 }
