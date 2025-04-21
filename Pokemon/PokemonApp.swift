@@ -27,11 +27,5 @@ struct PokemonApp: App {
 }
 
 //TODO: - Next
-
-// make the item load the show the data
-
-// make the local data storage
-// i think i will make load logic in will appear func
-
-// make the monster evaluation with showing the levels
-
+// show the evaluations
+// make the login and the other screens

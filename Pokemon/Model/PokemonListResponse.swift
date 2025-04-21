@@ -12,7 +12,7 @@ struct PokemonListResponse: Codable {
     let results: [PokemonPartial]
 }
 
-struct PokemonPartial: Codable, Equatable {
+struct PokemonPartial: Codable {
     let url: String
     let name: String
 }

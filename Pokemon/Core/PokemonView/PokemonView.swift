@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PokemonView: View {
-    @State private var searchText = ""
+
     private let gridItems = [
         GridItem(.flexible(), spacing: 10),
         GridItem(.flexible(), spacing: 10)
@@ -22,7 +22,7 @@ struct PokemonView: View {
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .padding(.leading)
-                    TextField("Search", text: $searchText)
+                    TextField("Search", text: $viewModel.searchPokemon)
                 }
                 .padding(.vertical, 15)
                 .background(
@@ -34,11 +34,11 @@ struct PokemonView: View {
                     Spacer()
                     
                     LazyVGrid(columns: gridItems, spacing: 10) {
-                        ForEach(viewModel.pokemonStringURLs.indices, id: \.self) { index in
+                        ForEach(viewModel.pokemonStringURLs, id: \.name) { urls in
                             NavigationLink(
-                                destination: PokemonDetailsView(loadingURL: viewModel.pokemonStringURLs[index].url)
+                                destination: PokemonDetailsView(loadingURL: urls.url)
                             ) {
-                                PokemonLargeImageCell(loadingURL: viewModel.pokemonStringURLs[index].url)
+                                PokemonLargeImageCell(loadingURL: urls.url)
                                     .frame(height: 270)
                             }
                             
