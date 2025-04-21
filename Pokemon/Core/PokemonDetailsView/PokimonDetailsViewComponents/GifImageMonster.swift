@@ -18,10 +18,13 @@ struct GifImageMonster: View {
             if let stringURL = sprit.animated?.frontDefault, let URL = URL(string: stringURL) {
                 OnlineGIFView(gifURL: URL)
                     .scaledToFill()
-                    .frame(width: 180, height: 200)
+                    .frame(width: 200, height: 250)
                     .padding(.bottom, -20)
             } else {
                 PokemonMonsterImage(url: sprit.frontDefault)
+                    .scaledToFill()
+                    .frame(width: 200, height: 250)
+                    .padding(.bottom, -20)
             }
         } else {
             if let stringURL = sprit.animated?.frontShiny, let URL = URL(string: stringURL) {

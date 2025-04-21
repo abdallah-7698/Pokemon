@@ -11,13 +11,7 @@ struct EvolutionsView: View {
     private let screenWidth: CGFloat = UIScreen.main.bounds.width
     
     @StateObject private var viewModel: EvolutionsViewModel = .init()
-        
-    let element: PokemonElement
-    let images: [String] = [
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png"
-    ]
-    let monsterName: String
-    
+            
     @Binding var order: Int
     
     var body: some View {
@@ -28,7 +22,7 @@ struct EvolutionsView: View {
                 .fontWeight(.medium)
                 .padding(5)
             
-            VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading) {
                 VStack {
                     ForEach(viewModel.EvolutionStages) { stage in
                         if let level = stage.level {
@@ -147,10 +141,12 @@ struct arrowUpdate: View {
             Text("Level \(level)")
         }
         .foregroundColor(.dark)
+        .padding(-5)
     }
+        
 }
 
 
 #Preview {
-    EvolutionsView(element: .noElement, monsterName: "", order: .constant(0))
+    EvolutionsView(order: .constant(0))
 }
