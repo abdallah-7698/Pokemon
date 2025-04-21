@@ -107,7 +107,7 @@ struct PokemonDetailsView: View {
                     EvolutionsView(
                         element: elements(from: viewModel.pokemon.types).first ?? noElement,
                         monsterName: viewModel.pokemon.name,
-                        order: viewModel.pokemon.id)
+                        order: $viewModel.pokemon.id)
                     
                 }
             }
