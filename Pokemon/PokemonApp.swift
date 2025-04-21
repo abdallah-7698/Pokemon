@@ -27,6 +27,5 @@ struct PokemonApp: App {
 }
 
 //TODO: - Next
-// show the evaluations
-// make the login and the other screens
 // add filter with lement with this https://pokeapi.co/api/v2/type/10/
+// make the login and the other screens
