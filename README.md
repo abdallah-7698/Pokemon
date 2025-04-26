@@ -1,17 +1,24 @@
 # Pokémon App
 A SwiftUI application that offers a sleek and interactive way to browse, search, and view detailed information about Pokémon. The app is built with a clean MVVM (Model-View-ViewModel) architecture to ensure organized and maintainable code.
 
-## 📸 Screenshots
+## 📸 Screenshots and Video
 
-| Pokémon | Search Pokémon | Pokémon Detail |Pokémon Search |
+### 🎥 Demo Video
+Check out the smooth navigation and features in action!
+
+https://github.com/user-attachments/assets/cc519b95-7cf5-4ffc-ab79-9763aa5cb447
+
+---
+
+### Screenshots
+
+| **Home - Pokémon List** | **Search Pokémon** | **Pokémon Details** |
+|:---:|:---:|:---:|
+| ![Pokémon List](https://github.com/user-attachments/assets/66ee7395-263e-4159-b14b-cd41f97e1a29) | ![Search Pokémon](https://github.com/user-attachments/assets/d71614c0-d66a-4833-9708-fdeddb2bddf4) | ![Pokémon Evolution](https://github.com/user-attachments/assets/b2b66854-820a-40f4-acb8-419695b616f4) |
+
+| **Smooth Navigation** | **Loading State** | **Pokémon Abilities** | **Browse Pokémon** |
 |:---:|:---:|:---:|:---:|
-| https://github.com/user-attachments/assets/b0afb557-268f-4b0d-83d3-964b289df793 | ![Search](https://github.com/user-attachments/assets/66ee7395-263e-4159-b14b-cd41f97e1a29) | ![Detail](https://github.com/user-attachments/assets/d71614c0-d66a-4833-9708-fdeddb2bddf4) | ![Evolution](https://github.com/user-attachments/assets/b2b66854-820a-40f4-acb8-419695b616f4)
-
-| Smooth Navigation | Loading State | Pokémon Abilities | Browse Pokémon |
-|:---:|:---:|:---:|:---:|
-| ![Navigation](https://github.com/user-attachments/assets/9d173b2b-c5e8-44d1-8593-dfdd7982d501) | ![Loading](https://github.com/user-attachments/assets/dbe1933d-9504-4ba9-aaf1-db7e1389a924) | ![Abilities](https://github.com/user-attachments/assets/0e9e8f4b-217b-4a8e-b4df-45e7e7b977dc) |  ![Browse](https://github.com/user-attachments/assets/ea590f78-4317-4a31-81a5-bbc66672f5e0)
-
-
+| ![Navigation](https://github.com/user-attachments/assets/9d173b2b-c5e8-44d1-8593-dfdd7982d501) | ![Loading](https://github.com/user-attachments/assets/dbe1933d-9504-4ba9-aaf1-db7e1389a924) | ![Abilities](https://github.com/user-attachments/assets/0e9e8f4b-217b-4a8e-b4df-45e7e7b977dc) | ![Browse Pokémon](https://github.com/user-attachments/assets/ea590f78-4317-4a31-81a5-bbc66672f5e0) |
 
 ---
 
