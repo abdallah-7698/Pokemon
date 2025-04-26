@@ -21,7 +21,7 @@ struct PokemonApp: App {
     
     var body: some Scene {
         WindowGroup {
-            PokemonView()
+            SplashView().withNavigation()
         }
     }
 }

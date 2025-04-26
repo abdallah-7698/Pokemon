@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PokemonView: View {
-
+    
     private let gridItems = [
         GridItem(.flexible(), spacing: 10),
         GridItem(.flexible(), spacing: 10)
@@ -70,4 +70,5 @@ struct PokemonView: View {
 
 #Preview {
     PokemonView()
+        .withNavigation()
 }

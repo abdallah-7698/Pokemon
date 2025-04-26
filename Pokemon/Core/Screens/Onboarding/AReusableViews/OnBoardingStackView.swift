@@ -14,20 +14,24 @@ struct OnBoardingStackView: View {
     let description: String
     
     var body: some View {
-        VStack(spacing: 15) {
-            Image(imageName)
-                .resizable()
-                .scaledToFit()
-                .padding(.bottom, 20)
-            Text(title)
-                .font(.largeTitle)
-                .fontWeight(.semibold)
-                .multilineTextAlignment(.center)
-            Text(description)
-                .font(.body)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-                .frame(width: UIScreen.main.bounds.width * 0.8)
+        VStack {
+            Spacer()
+                .frame(height: 40)
+            VStack(spacing: 15) {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.bottom, 20)
+                Text(title)
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                    .multilineTextAlignment(.center)
+                Text(description)
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .frame(width: UIScreen.main.bounds.width * 0.8)
+            }
         }
     }
 }

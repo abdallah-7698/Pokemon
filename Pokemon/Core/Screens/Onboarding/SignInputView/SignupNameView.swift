@@ -11,11 +11,19 @@ struct SignupNameView: View {
     @State private var name: String = ""
     @State private var isNameValid: Bool = false
     
+    @EnvironmentObject private var coordinator: Coordinator
+
+    
     var body: some View {
         SignupInputStepView(signupInputCases: .username, input: $name, isInputValid: $isNameValid) {
-            print("work")
+            coordinator.push {
+                SignSuccessView(signSuccessCases: .signup)
+            }
         }.onChange(of: name) { oldValue, newValue in
             isNameValid = !newValue.trimmingCharacters(in: .whitespaces).isEmpty
+        }
+        .backButtonBar(title: "Create account") {
+            coordinator.pop()
         }
     }
 }

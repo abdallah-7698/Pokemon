@@ -70,7 +70,7 @@ struct InputTextField: View {
                         }, label: {
                             Image(systemName: self.isSecured ? "eye.slash" : "eye")
                                 .accentColor(.gray)
-                                .opacity(isFocused ? 1 : 0.2)
+                                .opacity((isFocused || !text.isEmpty) ? 1 : 0.2)
                                 .padding()
                         })
                         
@@ -87,7 +87,7 @@ struct InputTextField: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(lineWidth: 2)
                 .foregroundColor(.gray)
-                .opacity(isFocused ? 1 : 0.2)
+                .opacity((isFocused || !text.isEmpty) ? 1 : 0.2)
         }
         .frame(height: 60)
     }

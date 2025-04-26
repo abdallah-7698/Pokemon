@@ -15,6 +15,9 @@ struct LoginView: View {
     @State private var isEmailValid: Bool = false
     @State private var isPasswordValid: Bool = false
     
+    @EnvironmentObject private var coordinator: Coordinator
+
+    
     var body: some View {
         VStack() {
             Spacer()
@@ -55,9 +58,16 @@ struct LoginView: View {
                 title: "Enter",
                 textColor: isEmailValid && isPasswordValid ? .white : .gray,
                 backgroundColor: isEmailValid && isPasswordValid ? Color.black : Color.gray.opacity(0.3)
-            ) { print("works") }
+            ) {
+                coordinator.push {
+                    SignSuccessView(signSuccessCases: .login)
+                }
+            }
                 .disabled(!(isEmailValid && isPasswordValid))
             
+        }
+        .backButtonBar(title: "Enter") {
+            coordinator.pop()
         }
         .padding()
     }

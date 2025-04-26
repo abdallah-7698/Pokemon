@@ -30,6 +30,8 @@ struct SignView: View {
     
     let regestration: Regestration
     
+    @EnvironmentObject private var coordinator: Coordinator
+    
     var body: some View {
         VStack {
             OnBoardingStackView(imageName: regestration.imageName, title: regestration.title, description: "How do you want to connect?")
@@ -43,13 +45,32 @@ struct SignView: View {
                     print("google sign in")
                 }
                 OnBoardingButton(title: "Continue with an email") {
-                    print("work 1")
+                    switch regestration {
+                    case .signup:
+                        coordinator.push {
+                            SignupEmailView()
+                        }
+                    case .login:
+                        coordinator.push {
+                            LoginView()
+                        }
+                    }
                 }
             }
         }
+        .backButtonBar(title: regestration == .login ? "Enter" : "Create account") {
+            coordinator.pop()
+        }
     }
+    
 }
 
 #Preview {
     SignView(regestration: .signup)
+        .withNavigation()
+}
+
+#Preview {
+    SignView(regestration: .login)
+        .withNavigation()
 }

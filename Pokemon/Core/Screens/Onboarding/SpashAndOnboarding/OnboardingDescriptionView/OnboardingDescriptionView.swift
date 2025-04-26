@@ -36,6 +36,8 @@ enum OnboardingDescription: CaseIterable {
 struct OnboardingDescriptionView: View {
     @State private var currentIndex: Int = 0
     
+    @EnvironmentObject private var coordinator: Coordinator
+    
     var body: some View {
         VStack(spacing: 30){
             TabView(selection: $currentIndex) {
@@ -66,7 +68,9 @@ struct OnboardingDescriptionView: View {
             
             OnBoardingButton(title: currentIndex < 1 ? "Next" : "Start") {
                 withAnimation {
-                    if currentIndex < 1 { currentIndex += 1 } else { /*login*/ }
+                    if currentIndex < 1 { currentIndex += 1 } else { coordinator.push {
+                        LoginOrSignupView()
+                    } }
                 }
             }.buttonStyle(PlainButtonStyle())
         }
@@ -76,4 +80,5 @@ struct OnboardingDescriptionView: View {
 
 #Preview {
     OnboardingDescriptionView()
+        .withNavigation()
 }

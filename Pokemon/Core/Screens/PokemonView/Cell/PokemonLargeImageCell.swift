@@ -60,7 +60,6 @@ struct PokemonLargeImageCell: View {
         }
         .onAppear {viewModel.fetchPokemon(from:loadingURL)}
         .frame(width: 150, height: 150)
-        
     }
     
     func elements(from types: [PokemonType]?) -> [PokemonElement] {
