@@ -1,8 +1,21 @@
 # Pokémon App
-
 A SwiftUI application that offers a sleek and interactive way to browse, search, and view detailed information about Pokémon. The app is built with a clean MVVM (Model-View-ViewModel) architecture to ensure organized and maintainable code.
 
-## Features
+## 📸 Screenshots
+
+| Pokémon | Search Pokémon | Pokémon Detail |Pokémon Search |
+|:---:|:---:|:---:|:---:|
+| https://github.com/user-attachments/assets/b0afb557-268f-4b0d-83d3-964b289df793 | ![Search](https://github.com/user-attachments/assets/66ee7395-263e-4159-b14b-cd41f97e1a29) | ![Detail](https://github.com/user-attachments/assets/d71614c0-d66a-4833-9708-fdeddb2bddf4) | ![Evolution](https://github.com/user-attachments/assets/b2b66854-820a-40f4-acb8-419695b616f4)
+
+| Smooth Navigation | Loading State | Pokémon Abilities | Browse Pokémon |
+|:---:|:---:|:---:|:---:|
+| ![Navigation](https://github.com/user-attachments/assets/9d173b2b-c5e8-44d1-8593-dfdd7982d501) | ![Loading](https://github.com/user-attachments/assets/dbe1933d-9504-4ba9-aaf1-db7e1389a924) | ![Abilities](https://github.com/user-attachments/assets/0e9e8f4b-217b-4a8e-b4df-45e7e7b977dc) |  ![Browse](https://github.com/user-attachments/assets/ea590f78-4317-4a31-81a5-bbc66672f5e0)
+
+
+
+---
+
+## ✨ Features
 
 - **Coordinator Pattern with Navigation Stack**: The app uses a navigation stack and the coordinator pattern to manage screen transitions effectively, keeping the navigation logic modular and maintainable.
 - **Custom Networking Layer**: A custom-built networking layer is implemented to handle API requests, ensuring reliability, scalability, and ease of testing.
@@ -12,7 +25,7 @@ A SwiftUI application that offers a sleek and interactive way to browse, search,
 - **Smooth Performance**: Optimized for fast loading and seamless user experience.
 - **Clean UI**: A visually pleasing and user-friendly interface designed using SwiftUI.
 
-## Architecture
+## 🏗 Architecture
 
 This project incorporates the **MVVM (Model-View-ViewModel)** architecture pattern, along with a **Navigation Stack** and the **Coordinator Pattern** for managing screen transitions and maintaining a clean separation of concerns in navigation logic.
 
@@ -21,7 +34,7 @@ This project incorporates the **MVVM (Model-View-ViewModel)** architecture patte
 - **ViewModel**: Acts as a bridge between the Model and the View, managing the app's logic and data flow.
 - **Coordinator Pattern**: Ensures that navigation logic is delegated to dedicated coordinators, making the codebase more modular and easier to maintain.
 
-## Technology Stack
+## 🛠 Technology Stack
 
 - **Language**: Swift
 - **Framework**: SwiftUI
@@ -29,7 +42,7 @@ This project incorporates the **MVVM (Model-View-ViewModel)** architecture patte
 - **Networking**: Custom Networking Layer
 - **Tools**: Xcode, Git
 
-## Getting Started
+## 🚀 Getting Started
 
 Follow the steps below to set up and run the Pokémon app on your local machine:
 
@@ -66,10 +79,6 @@ Contributions are welcome! If you'd like to contribute to the project, please fo
    git push origin feature-name
    ```
 4. Create a pull request to merge your changes into the main repository.
-
-## License
-
-This project is currently unlicensed. Please contact the repository owner for more details.
 
 ## Acknowledgments
 
