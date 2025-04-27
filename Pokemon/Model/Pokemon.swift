@@ -10,6 +10,7 @@ import Foundation
 /// Pokemon details that we get from the PokemonListResponse url
 /// Contains all the info about Pokemon
 struct Pokemon: Codable {
+    
     var id: Int
     let name: String
     let baseExperience: Int

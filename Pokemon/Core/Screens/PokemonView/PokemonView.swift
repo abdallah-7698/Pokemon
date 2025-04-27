@@ -38,7 +38,7 @@ struct PokemonView: View {
                             NavigationLink(
                                 destination: PokemonDetailsView(loadingURL: urls.url)
                             ) {
-                                PokemonLargeImageCell(loadingURL: urls.url)
+                                EquatableView(content: PokemonLargeImageCell(loadingURL: urls.url))
                                     .frame(height: 270)
                             }
                             

@@ -8,7 +8,11 @@
 
 import SwiftUI
 
-struct PokemonLargeImageCell: View {
+struct PokemonLargeImageCell: View, Equatable {
+    static func == (lhs: PokemonLargeImageCell, rhs: PokemonLargeImageCell) -> Bool {
+        lhs.loadingURL == rhs.loadingURL
+    }
+    
     
     @ObservedObject var viewModel: PokemonViewModel = .init()
     
